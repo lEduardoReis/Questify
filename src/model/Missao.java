@@ -16,7 +16,7 @@ public class Missao {
         this.titulo = titulo;
         this.descricao = descricao;
         this.dificuldade = dificuldade;
-        this.statusMissao = statusMissao.PENDENTE;
+        this.statusMissao = StatusMissao.PENDENTE;
     }
 
     public int calcularXp(){
@@ -47,9 +47,20 @@ public class Missao {
                 return 0;
         }
     }
+    public void aplicarRecompensa(Usuario usuario){
 
-    public void concluir(){
+        int xp = calcularXp();
+        int moedas = calcularMoedas();
+        usuario.adicionarXp(xp);
+        usuario.adicionarMoedas(moedas);
+
+        System.out.println("XP recebido: " + xp);
+        System.out.println("Moedas recebidas: " + moedas);
+    }
+
+    public void concluir(Usuario usuario){
         this.statusMissao = StatusMissao.CONCLUIDA;
+        aplicarRecompensa(usuario);
     }
 
     public void cancelar(){
