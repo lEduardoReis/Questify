@@ -36,27 +36,28 @@ Criar um sistema que torne atividades cotidianas mais motivadoras, simulando mec
 
 ## 🏗️ Estrutura do projeto
 
+```text
 Questify
 │
 ├── app
-│ └── Main.java
+│   └── Main.java
 │
 ├── model
-│ ├── Usuario.java
-│ └── Missao.java
+│   ├── Usuario.java
+│   └── Missao.java
 │
 ├── enums
-│ ├── Dificuldade.java
-│ └── StatusMissao.java
+│   ├── Dificuldade.java
+│   └── StatusMissao.java
 │
 ├── repository
-│ ├── MissaoRepository.java
-│ └── UsuarioRepository.java
+│   ├── MissaoRepository.java
+│   └── UsuarioRepository.java
 │
 ├── service
-│ ├── MissaoService.java
-│ └── UsuarioService.java
-
+│   ├── MissaoService.java
+│   └── UsuarioService.java
+```
 
 ---
 
