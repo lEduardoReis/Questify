@@ -5,8 +5,8 @@ import model.Missao;
 import model.Usuario;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
-
 
 
 public class Main {
@@ -19,19 +19,53 @@ public class Main {
         String nomeUsuario = input.nextLine();
 
         Usuario usuario = new Usuario(1, nomeUsuario);
-        Missao m1 = executarMissao(input, usuario, 1);
-        Missao m2 = executarMissao(input, usuario, 2);
+        ArrayList<Missao> missoes = new ArrayList<>();
 
-        System.out.println("\n ==== RESULTADO FINAL ====");
-        usuario.exibirStatus();
-        m1.exibirDetalhes();
-        m2.exibirDetalhes();
+        int id = 1;
+        boolean controle = true;
 
+        while (controle){
+
+            mostrarMenu();
+
+            int opcao = input.nextInt();
+
+            switch (opcao){
+                case 1:
+                    Missao missaoCriada = executarMissao(input, usuario, id);
+                    missoes.add(missaoCriada);
+                    id++;
+                break;
+                case 2:
+                    mostrarMissao(usuario, missoes);
+                break;
+                case 3:
+                    Missao m = selecionarMissao(input, missoes);
+                    if (m != null){
+                        m.concluir(usuario);
+                    }
+                    break;
+                case 4:
+                    Missao missaoCancela = selecionarMissao(input, missoes);
+                    if( missaoCancela != null){
+                        missaoCancela.cancelar();
+                    }
+                    break;
+                case 5:
+                    System.out.println("Encerrando o sistema.");
+                    controle = false;
+                break;
+                default:
+                    System.out.println("Opção Invalida.");
+                break;
+            }
+        }
         input.close();
     }
 
     public static Missao executarMissao(Scanner input, Usuario usuario, int id){
 
+        input.nextLine();
         System.out.println("++++ MISSÃO " + id + " ++++");
         System.out.println("Digite o titulo da Missão: ");
         String titulo = input.nextLine();
@@ -70,27 +104,57 @@ public class Main {
         usuario.exibirStatus();
         missao.exibirDetalhes();
 
-        System.out.println("1 - Concluir");
-        System.out.println("2 - Cancelar");
 
-        int acao = input.nextInt();
-
-        switch (acao){
-            case 1:
-                System.out.println("\n==== CONCLUINDO MISSÃO ====");
-                missao.concluir(usuario);
-                break;
-            case 2:
-                System.out.println("\n ===== MISSAO CANCELADA =====");
-                missao.cancelar();
-                System.out.println("Missão cancelada!");
-                break;
-            default:
-                System.out.println("Opção invalida.");
-
-        }
         input.nextLine();
         return missao;
 
+    }
+
+    public static void mostrarMenu(){
+        System.out.println("\n =====MENU DO SISTEMA====");
+        System.out.println("1 - Criar Missão");
+        System.out.println("2 - Ver Status e Missões");
+        System.out.println("3 - Concluir Missão");
+        System.out.println("4 - Cancelar Missão");
+        System.out.println("5 - Sair");
+    }
+
+    public static Missao selecionarMissao(Scanner input, ArrayList<Missao> missoes){
+        System.out.println("\n =====MISSÔES ====");
+
+        if(missoes.isEmpty()){
+            System.out.println("lista de missões vazia.");
+            return null;
+        }
+
+        for(Missao missao : missoes){
+            missao.exibirDetalhes();
+        }
+
+        System.out.println("digite o número da missão desejada: ");
+        int escolha = input.nextInt();
+
+        int indice = escolha - 1;
+
+        if (indice >= 0 && indice < missoes.size()){
+            return missoes.get(indice);
+        } else{
+            System.out.println("Missão invalida.");
+            return null;
+        }
+
+    }
+
+    public static void mostrarMissao(Usuario usuario, ArrayList<Missao> missoes ){
+        System.out.println("\n ====== Status e Missões ======");
+        usuario.exibirStatus();
+
+        if (missoes.isEmpty()){
+            System.out.println("Nenhuma missão foi criada.");
+            return;
+        }
+        for (Missao missao : missoes){
+            missao.exibirDetalhes();
+        }
     }
 }
