@@ -14,12 +14,8 @@ Criar um sistema que torne atividades cotidianas mais motivadoras, simulando mec
 
 ## 🧠 Funcionalidades atuais
 
-- ✅ Criação de missões via terminal
-- ✅ Escolha de dificuldade:
-    - Fácil
-    - Média
-    - Difícil
-    - Épica
+- ✅ Criação de missões
+- ✅ Armazenamento de múltiplas missões (`ArrayList`)
 - ✅ Sistema de recompensa:
     - XP baseado na dificuldade
     - Moedas baseadas na dificuldade
@@ -29,8 +25,12 @@ Criar um sistema que torne atividades cotidianas mais motivadoras, simulando mec
     - Pendente
     - Concluída
     - Cancelada
-- ✅ Execução de múltiplas missões
-- ✅ Refatoração com método reutilizável (`executarMissao`)
+- ✅ Menu interativo (loop)
+- ✅ Seleção de missão para:
+    - Concluir
+    - Cancelar
+- ✅ Código modularizado (métodos reutilizáveis)
+
 
 ---
 
@@ -78,12 +78,13 @@ O projeto segue uma organização inspirada em aplicações backend reais:
 ## 🔄 Fluxo atual da aplicação
 
 1. Usuário é criado
-2. Missões são criadas via entrada do usuário
-3. Usuário escolhe:
-    - Concluir missão
-    - Cancelar missão
-4. Sistema aplica recompensas automaticamente
-5. Resultado final é exibido no console
+2. Usuário cria missões (ficam pendentes)
+3. Usuário pode:
+   - visualizar status e missões
+   - concluir uma missão específica
+   - cancelar uma missão específica
+4. Sistema atualiza XP, moedas e nível automaticamente
+5. Loop continua até o usuário sair
 
 ---
 
@@ -93,6 +94,10 @@ O projeto segue uma organização inspirada em aplicações backend reais:
 - Encapsulamento
 - Enum
 - Métodos reutilizáveis
+- Coleções (ArrayList)
+- Manipulação de listas
+- Menu interativo
+- Métodos com retorno
 - Separação de responsabilidades
 - Refatoração de código
 - Organização em camadas (inicial)
@@ -100,6 +105,15 @@ O projeto segue uma organização inspirada em aplicações backend reais:
 ---
 
 ## 📈 Evolução do projeto
+
+O projeto evoluiu de:
+
+- execução simples de uma missão  
+  ➡️ para
+- sistema interativo com múltiplas missões  
+  ➡️ com seleção dinâmica e manipulação de estado
+
+---
 
 Este projeto está sendo desenvolvido de forma progressiva, acompanhando o aprendizado em Java.
 
@@ -109,10 +123,10 @@ Cada etapa adiciona novos conceitos e melhorias estruturais, simulando a evoluç
 
 ## 🚀 Próximos passos
 
-- [ ] Menu interativo (loop)
-- [ ] Validação de entradas
-- [ ] Uso de coleções (`ArrayList`) para múltiplas missões
-- [ ] Integração real entre Service e Repository
+- [ ] Impedir ações inválidas (concluir missão já concluída)
+- [ ] Melhorar exibição das missões (lista numerada)
+- [ ] Criar getters na classe `Missao`
+- [ ] Melhorar UX do menu
 - [ ] Persistência de dados (arquivo ou banco)
 - [ ] API REST com Spring Boot
 
