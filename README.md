@@ -14,22 +14,19 @@ Criar um sistema que torne atividades cotidianas mais motivadoras, simulando mec
 
 ## 🧠 Funcionalidades atuais
 
+## 🧠 Funcionalidades atuais
+
 - ✅ Criação de missões
-- ✅ Armazenamento de múltiplas missões (`ArrayList`)
-- ✅ Sistema de recompensa:
-    - XP baseado na dificuldade
-    - Moedas baseadas na dificuldade
-- ✅ Sistema de níveis:
-    - A cada 100 XP o usuário sobe de nível
-- ✅ Controle de status da missão:
-    - Pendente
-    - Concluída
-    - Cancelada
-- ✅ Menu interativo (loop)
-- ✅ Seleção de missão para:
-    - Concluir
-    - Cancelar
-- ✅ Código modularizado (métodos reutilizáveis)
+- ✅ Listagem de missões (formato amigável)
+- ✅ Conclusão de missão com recompensa
+- ✅ Cancelamento de missão
+- ✅ Remoção de missão
+- ✅ Busca de missão por ID
+- ✅ Filtro de missões por status (pendente, concluída, cancelada)
+- ✅ Sistema de XP e moedas
+- ✅ Sistema de níveis automático
+- ✅ Validação de ações (não permite concluir/cancelar missão inválida)
+- ✅ Menu interativo com múltiplas operações
 
 
 ---
@@ -106,27 +103,27 @@ O projeto segue uma organização inspirada em aplicações backend reais:
 
 ## 📈 Evolução do projeto
 
+## 📈 Evolução do projeto
+
 O projeto evoluiu de:
 
 - execução simples de uma missão  
   ➡️ para
 - sistema interativo com múltiplas missões  
-  ➡️ com seleção dinâmica e manipulação de estado
+  ➡️ com seleção dinâmica e manipulação de estado  
+  ➡️ com operações completas de CRUD (Create, Read, Update, Delete)  
+  ➡️ com filtro e busca de dados
 
----
-
-Este projeto está sendo desenvolvido de forma progressiva, acompanhando o aprendizado em Java.
-
-Cada etapa adiciona novos conceitos e melhorias estruturais, simulando a evolução de um sistema real.
-
----
+Este projeto está sendo desenvolvido de forma progressiva, acompanhando o aprendizado em Java e simulando a evolução de um sistema real.
 
 ## 🚀 Próximos passos
 
-- [ ] Impedir ações inválidas (concluir missão já concluída)
-- [ ] Melhorar exibição das missões (lista numerada)
-- [ ] Criar getters na classe `Missao`
-- [ ] Melhorar UX do menu
+- [ ] Implementar herança nas missões
+- [ ] Aplicar polimorfismo (comportamentos diferentes por tipo de missão)
+- [ ] Criar camada de Service (separar lógica do Main)
+- [ ] Melhorar validação de entrada do usuário
+- [ ] Contagem de missões por status
+- [ ] Ordenação de missões
 - [ ] Persistência de dados (arquivo ou banco)
 - [ ] API REST com Spring Boot
 

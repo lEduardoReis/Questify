@@ -1,6 +1,7 @@
 package app;
 
 import enums.Dificuldade;
+import enums.StatusMissao;
 import model.Missao;
 import model.Usuario;
 
@@ -52,6 +53,48 @@ public class Main {
                     }
                     break;
                 case 5:
+                    System.out.println("\n===== FILTRAR MISSÕES =====");
+                    System.out.println("1 - Pendentes");
+                    System.out.println("2 - Concluídas");
+                    System.out.println("3 - Canceladas");
+
+                    int filtro = input.nextInt();
+
+                    switch (filtro){
+                        case 1:
+                            mostrarMissoesPorStatus(missoes, StatusMissao.PENDENTE);
+                            break;
+                        case 2:
+                            mostrarMissoesPorStatus(missoes, StatusMissao.CONCLUIDA);
+                            break;
+                        case 3:
+                            mostrarMissoesPorStatus(missoes, StatusMissao.CANCELADA);
+                            break;
+                        default:
+                            System.out.println("Opção invalidade.");
+                    }
+                    break;
+                case 6:
+                    Missao missaoRemovida = selecionarMissao(input, missoes);
+                    if(missaoRemovida != null){
+                        missoes.remove(missaoRemovida);
+                        System.out.println("Missão removida com sucesso!");
+                    }
+
+                    break;
+                case 7:
+                    System.out.println("Digite o ID da missão: ");
+                    int idBusca = input.nextInt();
+
+                    Missao missaoEncontrada = buscarMissaoPorId(missoes, idBusca);
+
+                    if (missaoEncontrada != null){
+                        missaoEncontrada.exibirDetalhes();
+                    } else {
+                        System.out.println("Missão não encontrada.");
+                    }
+                    break;
+                case 8:
                     System.out.println("Encerrando o sistema.");
                     controle = false;
                 break;
@@ -116,7 +159,10 @@ public class Main {
         System.out.println("2 - Ver Status e Missões");
         System.out.println("3 - Concluir Missão");
         System.out.println("4 - Cancelar Missão");
-        System.out.println("5 - Sair");
+        System.out.println("5 - Filtrar Missões");
+        System.out.println("6 - Remover Missões");
+        System.out.println("7 - Buscar Missões por ID");
+        System.out.println("8 - Sair");
     }
 
     public static Missao selecionarMissao(Scanner input, ArrayList<Missao> missoes){
@@ -127,8 +173,12 @@ public class Main {
             return null;
         }
 
-        for(Missao missao : missoes){
-            missao.exibirDetalhes();
+        for(int i = 0; i < missoes.size(); i++){
+            Missao missao = missoes.get(i);
+
+            System.out.println(
+                    (i + 1) + " - " + missao.getTitulo() + " [ " + missao.getStatusMissao() + " ]"
+            );
         }
 
         System.out.println("digite o número da missão desejada: ");
@@ -149,12 +199,50 @@ public class Main {
         System.out.println("\n ====== Status e Missões ======");
         usuario.exibirStatus();
 
+
         if (missoes.isEmpty()){
             System.out.println("Nenhuma missão foi criada.");
             return;
         }
-        for (Missao missao : missoes){
-            missao.exibirDetalhes();
+
+        System.out.println("\n =========== Missões =========");
+
+        for(int i = 0; i < missoes.size(); i++){
+            Missao missao = missoes.get(i);
+
+            System.out.println(
+                    (i + 1) + " - " + missao.getTitulo() + " [ " + missao.getStatusMissao() + " ]"
+            );
         }
+    }
+
+    public static void mostrarMissoesPorStatus(ArrayList<Missao> missoes, StatusMissao status ){
+        if(missoes.isEmpty()){
+            System.out.println("Nenhuma missão foi criada.");
+            return;
+        }
+        boolean encontrou = false;
+
+        for (int i = 0; i < missoes.size(); i++){
+            Missao missao = missoes.get(i);
+            if (missao.getStatusMissao() == status){
+                System.out.println(
+                        (i + 1) + " - " + missao.getTitulo() + " [" + missao.getStatusMissao() + "]"
+                );
+                encontrou = true;
+            }
+        }
+        if(!encontrou){
+            System.out.println("Nenhuma missão foi encontrada com esse status.");
+        }
+    }
+
+    public static Missao buscarMissaoPorId(ArrayList<Missao> missoes, int id){
+        for(Missao missao : missoes){
+            if(missao.getId() == id){
+                return missao;
+            }
+        }
+        return null;
     }
 }

@@ -59,12 +59,20 @@ public class Missao {
     }
 
     public void concluir(Usuario usuario){
-        this.statusMissao = StatusMissao.CONCLUIDA;
-        aplicarRecompensa(usuario);
+        if(this.statusMissao == StatusMissao.PENDENTE){
+            this.statusMissao = StatusMissao.CONCLUIDA;
+            aplicarRecompensa(usuario);
+        }else{
+            System.out.println("Não foi possível concluir a missão.");
+        }
     }
 
     public void cancelar(){
-        this.statusMissao = StatusMissao.CANCELADA;
+        if(this.statusMissao == StatusMissao.PENDENTE){
+            this.statusMissao = StatusMissao.CANCELADA;
+        }else{
+            System.out.println("Não foi possível cancelar a missão.");
+        }
     }
 
     public void exibirDetalhes() {
@@ -75,4 +83,19 @@ public class Missao {
         System.out.println("Dificuldade: " + this.dificuldade);
         System.out.println("Status: " + this.statusMissao);
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public StatusMissao getStatusMissao() {
+        return statusMissao;
+    }
+
+
+
 }
